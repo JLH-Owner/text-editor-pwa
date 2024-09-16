@@ -1,0 +1,6 @@
+{
+    "name": "PWA Text Editor",
+    "short_name": "PWA",
+    "start_url": "/",
+    "service_worker": "/src-sw.js"
+}
