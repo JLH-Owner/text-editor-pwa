@@ -20,14 +20,47 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'J.A.T.E.',
+        title: 'Progressive Web Application',
       }),
-      new WebpackPwaManifest.GenerateSW(InjectManifest) 
+      new WebpackPwaManifest({
+        name: 'PWA Text Editor',
+        short_name: 'PWA',
+        description: 'Just Another Text Editor',
+        start_url: '.',
+        display: 'standalone',
+        background_color: '#ffffff',
+        theme_color: '#317EFB',
+        logos: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [192, 512],
+            destination: path.join('logos'),
+            format: 'png'
+          },
+        ],
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
     ],
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        },  
       ],
     },
   };
