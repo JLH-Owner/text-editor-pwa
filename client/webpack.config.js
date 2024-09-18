@@ -30,12 +30,13 @@ module.exports = () => {
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#317EFB',
-        logos: [
+        fingerprints: false,
+        icons: [
           {
-            src: path.resolve('src/images/logo.png'),
-            sizes: [192, 512],
-            destination: path.join('logos'),
-            format: 'png'
+            src: path.resolve('./src/images/logo.png'),
+            sizes: [96, 192, 512],
+            destination: path.join('assets', 'icons'),
+            purpose: any
           },
         ],
       }),
