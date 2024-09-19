@@ -34,7 +34,7 @@ const matchCallback = ({request}) =>
 
 registerRoute(
   matchCallback,
-new CacheFirst({
+new StaleWhileRevalidate({
   cacheName: 'asset-cache',
   plugins: [
     new CacheableResponsePlugin({
@@ -46,4 +46,6 @@ new CacheFirst({
   ],
 })
 );
-offlineFallback(StaleWhileRevalidate);
+offlineFallback({
+  pageFallback: '/index.html'
+});
